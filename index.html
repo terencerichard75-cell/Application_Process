@@ -118,8 +118,9 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 80px 0 80px;
+  padding: 52px 0 60px;
   overflow: hidden;
+  min-height: 0;
 }
 
 /* ── FOOTER NAV ── */
@@ -242,6 +243,7 @@ html, body {
   display: grid;
   height: 100%;
   overflow: hidden;
+  min-height: 0;
 }
 .step-layout.split { grid-template-columns: 320px 1fr; }
 .step-layout.full { grid-template-columns: 1fr; }
@@ -249,12 +251,13 @@ html, body {
 /* Panneau gauche */
 .step-left {
   background: var(--ink);
-  padding: 48px 40px;
+  padding: 40px 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-right: 1px solid rgba(201,185,154,0.08);
   overflow: hidden;
+  min-height: 0;
 }
 .step-num {
   font-family: 'Cormorant Garamond', serif;
@@ -314,10 +317,12 @@ html, body {
 .step-right {
   background: var(--cream);
   overflow-y: auto;
-  padding: 48px 48px 32px;
+  -webkit-overflow-scrolling: touch;
+  padding: 36px 40px 32px;
   display: flex;
   flex-direction: column;
   gap: 3px;
+  min-height: 0;
 }
 
 /* Items */
@@ -658,19 +663,159 @@ html, body {
 }
 
 /* Mobile */
-@media (max-width: 768px) {
-  .step-layout.split { grid-template-columns: 1fr; }
-  .step-left { padding: 28px 24px; min-height: auto; }
-  .step-right { padding: 24px; }
-  .item { grid-template-columns: 1fr; gap: 6px; }
-  .cv-cols { grid-template-columns: 1fr; }
-  .slides-grid { grid-template-columns: 1fr; }
-  #nav { padding: 0 20px; }
-  #footer-nav { padding: 0 20px; }
-  .cover-content { padding: 0 24px; }
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE FIRST
+═══════════════════════════════════════════ */
+
+/* ── TABLETTE (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .step-layout.split { grid-template-columns: 260px 1fr; }
+  .step-left { padding: 36px 28px; }
+  .step-right { padding: 32px 32px; }
   .score-note { display: none; }
-  .recap-item { grid-template-columns: 36px 1fr; }
+  .slides-grid { grid-template-columns: 1fr; }
+}
+
+/* ── MOBILE (≤ 768px) ── */
+@media (max-width: 768px) {
+
+  /* Navigation top */
+  #nav {
+    padding: 0 16px;
+    height: 48px;
+  }
+  .nav-logo { font-size: 11px; letter-spacing: 0.1em; }
+  .nav-dots { gap: 3px; }
+  .nav-dot { width: 5px; height: 5px; }
+  .nav-dot.active { width: 14px; }
+  .nav-counter { font-size: 9px; margin-left: 8px; }
+
+  /* Footer nav */
+  #footer-nav {
+    padding: 0 16px;
+    height: 56px;
+  }
+  .btn-nav { padding: 7px 14px; font-size: 9px; }
+  .step-label { font-size: 9px; letter-spacing: 0.1em; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Layout split → colonne unique + scroll */
+  .step-layout.split {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  /* Panneau gauche compact */
+  .step-left {
+    padding: 20px 20px 16px;
+    border-right: none;
+    border-bottom: 1px solid rgba(201,185,154,0.1);
+    justify-content: flex-start;
+  }
+  .step-num { font-size: 48px; margin-bottom: -4px; }
+  .step-eyebrow { font-size: 8px; margin-bottom: 6px; }
+  .step-title { font-size: 20px; margin-bottom: 4px; }
+  .step-divider { margin: 10px 0 10px; }
+  .step-desc { font-size: 12px; line-height: 1.7; }
+  .step-output { margin-top: 12px; padding: 10px 12px; }
+  .step-output-label { font-size: 7px; }
+  .step-output-val { font-size: 11px; }
+
+  /* Panneau droit scrollable */
+  .step-right {
+    padding: 16px 16px 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 2px;
+  }
+
+  /* Items */
+  .item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 14px 14px;
+  }
+  .item-label { font-size: 8px; letter-spacing: 0.14em; }
+  .item-body { font-size: 12px; line-height: 1.72; }
+
+  /* Colonnes CV → 1 seule visible */
+  .cv-cols {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+  .cv-col-header { font-size: 8px; padding: 5px 10px; }
+
+  /* Score bars */
+  .score-row { padding: 12px 14px; gap: 10px; flex-wrap: wrap; }
+  .score-label { font-size: 11px; width: 100%; flex: none; }
+  .score-weight { width: auto; }
+  .score-bar-wrap { width: 80px; }
+  .score-note { display: none; }
+
+  /* HTML sections */
+  .html-sec { grid-template-columns: 80px 1fr; gap: 12px; padding: 12px 14px; }
+  .html-sec-label { font-size: 10px; }
+  .html-sec-desc { font-size: 11px; }
+
+  /* Canal steps */
+  .canal-step { grid-template-columns: 36px 1fr; padding: 12px 14px; }
+  .canal-day { font-size: 16px; }
+  .canal-action { font-size: 11px; }
+
+  /* Slides */
+  .slides-grid { grid-template-columns: 1fr; gap: 2px; }
+  .slide-item { padding: 12px 14px; }
+  .slide-num { font-size: 18px; }
+
+  /* Airtable */
+  .col-row { flex-wrap: wrap; gap: 6px; padding: 10px 14px; }
+  .col-name { font-size: 10px; width: 100%; }
+  .col-desc { font-size: 10px; width: 100%; }
+
+  /* Récap */
+  .recap-item { grid-template-columns: 32px 1fr; }
+  .recap-num { font-size: 14px; padding: 10px 6px; }
+  .recap-title { font-size: 10px; padding: 10px 10px; }
   .recap-desc { display: none; }
+
+  /* Formats */
+  .format-card { padding: 14px 16px; gap: 10px; }
+  .format-title { font-size: 11px; }
+  .format-desc { font-size: 11px; }
+
+  /* Block headers */
+  .block-header { padding: 10px 14px; }
+  .block-header span { font-size: 8px; }
+
+  /* Decisions */
+  .decision-badge { padding: 12px 14px; gap: 10px; }
+  .badge-label { font-size: 8px; min-width: 90px; }
+  .badge-desc { font-size: 11px; }
+
+  /* Cover */
+  .cover-content { padding: 0 20px; }
+  .cover-eyebrow { font-size: 9px; margin-bottom: 16px; }
+  .cover-sub { font-size: 12px; margin-top: 16px; margin-bottom: 28px; }
+  .cover-tags { gap: 6px; }
+  .cover-tag { font-size: 8px; padding: 4px 10px; }
+
+  /* Récap plein écran */
+  .step-layout.full > div { padding: 20px 16px; }
+
+  /* Screen inner */
+  .screen-inner { padding: 56px 0 56px; }
+
+  /* Décision badges label */
+  .decisions { gap: 2px; }
+}
+
+/* ── TRÈS PETIT MOBILE (≤ 380px) ── */
+@media (max-width: 380px) {
+  .step-title { font-size: 18px; }
+  .item-body { font-size: 11px; }
+  .btn-nav { padding: 6px 10px; font-size: 8px; }
+  .step-label { display: none; }
+  .nav-counter { font-size: 8px; }
 }
 </style>
 </head>
@@ -1204,7 +1349,7 @@ html, body {
 <div class="screen" id="screen-12">
   <div class="screen-inner">
     <div class="step-layout full" style="height:100%">
-      <div style="background:var(--cream);overflow-y:auto;padding:48px 48px 32px;display:flex;flex-direction:column;gap:4px">
+      <div style="background:var(--cream);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 24px 24px;display:flex;flex-direction:column;gap:4px;min-height:0">
         <p style="font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--terra);margin-bottom:4px">Récapitulatif complet</p>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ink);margin-bottom:6px">Toutes les étapes <em style="font-style:italic;color:var(--terra)">en un coup d'œil</em></h2>
         <div style="width:36px;height:1px;background:var(--sand);margin-bottom:20px"></div>
